@@ -50,7 +50,7 @@ public class CitySim9002 {
             System.out.println("Visitor " + i + " is a " + curType);
             
             //set preference list
-            List<String> curPreference = curVisitor.setPreferenceList(curType);
+            curVisitor.getPreferenceList(curType);
             
             //NO.2 assign random location for each visitor
             while(curVisitor.getLocation() != null){ //leave the city as terminator

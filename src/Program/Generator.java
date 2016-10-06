@@ -12,7 +12,7 @@ import java.util.Random;
  * @author Carol
  */
 public class Generator {
-    public static Random generator;
+    public Random generator;
 //    public static String[] typeList = {"Student", "Professor","Business Person", "Blogger"};
 //    public static String[] locationList = {"Squirrel Hill", "Downtown", "The Point", "The Cathedral of Learning", null};    
     
@@ -20,6 +20,9 @@ public class Generator {
         generator = new Random(seed);
     }
     
+    public Generator(){
+        generator = new Random(9);
+    }
     
 //    //random generator for visitor type
 //    public static String randomType(){
@@ -33,12 +36,12 @@ public class Generator {
 //    }
     
     //random generator of number for visitor type
-    public static int randomTypeNum(int bound){
+    public int randomTypeNum(int bound){
           return generator.nextInt(bound);
     }
     
     //random generator for location within the bound
-    public static int randomLocationNum(int bound){
+    public int randomLocationNum(int bound){
         return generator.nextInt(bound);
     }
     

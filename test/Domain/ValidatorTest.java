@@ -78,8 +78,8 @@ public class ValidatorTest {
     //Return true if both validateArgumentType() and validateNumberOfArguments() return true
     @Test
     public void ifBothMethodReturnTrue(){
-         Mockito.when(validator.validateArgumentType(any(String[].class))).thenReturn(true);
-         Mockito.when(validator.validateNumberOfArguments(any(String[].class))).thenReturn(true);
+         when(validator.validateArgumentType(any(String[].class))).thenReturn(true);
+         when(validator.validateNumberOfArguments(any(String[].class))).thenReturn(true);
          Assert.assertTrue(validator.validateArguments(any(String[].class)));
     }
     

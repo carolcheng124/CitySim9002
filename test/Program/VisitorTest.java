@@ -5,12 +5,18 @@
  */
 package Program;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
 import org.mockito.Mockito;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  *
@@ -32,19 +38,6 @@ public class VisitorTest {
     @After
     public void tearDown() throws Exception{
     }
-//
-//    /**
-//     * SET TYPE TEST - 0
-//     * Test of setType method, of class Visitor.
-//     * 
-//     */
-//    @Test
-//    public void testSetType() {
-//        System.out.println("setType");
-//        String type = "";
-//        Visitor instance = new Visitor();
-//        instance.setType(type);
-//    }
 
     
     /**
@@ -59,8 +52,8 @@ public class VisitorTest {
     public void testSetType0() {
         Boolean same = false;
         
-        Generator mockGenerator = Mockito.mock(Generator.class);
-        Mockito.when(mockGenerator.randomTypeNum(typeList.length)).thenReturn(0);
+        Generator mockGenerator = mock(Generator.class);
+        when(mockGenerator.randomTypeNum(anyInt())).thenReturn(0);
         
         Visitor[] visitors = new Visitor[visitorNum];
         
@@ -68,7 +61,7 @@ public class VisitorTest {
         for(int i = 0; i < visitorNum; i++){
             visitors[i] = new Visitor();
             String curType = visitors[i].setType(mockGenerator, typeList.length);
-            if("Students".equals(curType)) same = true;
+            if("Student".equals(curType)) same = true;
         }
         
         assertTrue(same);
@@ -97,28 +90,6 @@ public class VisitorTest {
         assertTrue(difference);
     }
     
-    
-//    /**
-//     * Test of getLocation method, of class Visitor.
-//     * Double + Stubbing
-//     * Mock the random generator
-//     * Set the return value as "Downtown"
-//     * result should be as the same
-//     */
-//    @Test
-//    public void testGetLocation() {
-//        System.out.println("getLocation() Test"); 
-//        
-//        Generator mockGenerator = Mockito.mock(Generator.class);
-//        Mockito.when(mockGenerator.randomLocation(5)).thenReturn("Downtown");
-//        
-//        visitor.setLocation(mockGenerator.randomLocation(5));
-//        
-//        String expResult = "Downtown";
-//        String result = visitor.getLocation();
-//        
-//        assertEquals(expResult, result);
-//    }
 
     
     /**
@@ -133,8 +104,8 @@ public class VisitorTest {
     public void testSetLocation0() {
         Boolean same = false;
         
-        Generator mockGenerator = Mockito.mock(Generator.class);
-        Mockito.when(mockGenerator.randomLocationNum(locationList.length)).thenReturn(0);
+        Generator mockGenerator = mock(Generator.class);
+        when(mockGenerator.randomLocationNum(anyInt())).thenReturn(0);
         
         Visitor[] visitors = new Visitor[visitorNum];
         
@@ -175,7 +146,7 @@ public class VisitorTest {
 
     /**
      * LIKE OR NOT TEST - 0
-     * Double + STUBBING
+     * Double
      * Test of likeOrNot method, of class Visitor.
      * Set the visitor's type to be a "Student"
      * Set the test location to be "Downtown"
@@ -184,17 +155,23 @@ public class VisitorTest {
      */
     @Test
     public void testLikeOrNot0() {
-        visitor.type = "Student";//double
-        visitor.setPreferenceList(visitor.type);
-//        Mockito.when(visitor.setPreferenceList(visitor.type))).thenReturn("Squirrel Hill", "Downtown", "The Point");//stubbing
-        String location = "Downtown";
         
+//        Visitor mockVisitor = mock(Visitor.class);
+//        when(mockVisitor.getPreferenceList(any(String.class))).thenReturn(Arrays.asList("Squirrel Hill", "Downtown", "The Point"));
+//        
+        visitor.type = "Student";//double
+        String location = "Downtown";
+        visitor.getPreferenceList(visitor.type);
+
+//when(visitor.getPreferenceList(any(String.class))).thenReturn(visitor.likeList = new ArrayList<String>(Arrays.asList("Squirrel Hill", "Downtown", "The Point")));//stubbing
+//        
+//        mockVisitor.likeList =v mockVisitor.getPreferenceList(type);
         assertTrue(visitor.likeOrNot(location));
         
     }
     
     /**
-     * Double+stubbing
+     * Double
      * Test of likeOrNot method, of class Visitor.
      * Set the visitor's type to be a "Business person"
      * Set the test location to be "The Cathedral of Learning"
@@ -206,7 +183,7 @@ public class VisitorTest {
         
         String location = "The Cathedral of Learning";
         visitor.type = "Business Person";//double
-        visitor.setPreferenceList(visitor.type);//stubbing
+        visitor.getPreferenceList(visitor.type);//stubbing
         
         assertFalse(visitor.likeOrNot(location));
         

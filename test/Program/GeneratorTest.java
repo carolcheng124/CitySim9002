@@ -104,7 +104,7 @@ public class GeneratorTest {
         int[] typeNums = new int[visitorNum];
         
         for(int i = 0; i < visitorNum; i++){
-            typeNums[i] = Generator.randomTypeNum(typeList.length);
+            typeNums[i] = generator.randomTypeNum(typeList.length);
             if(typeNums[0] != typeNums[i]) difference = true;
         }
         
@@ -123,7 +123,7 @@ public class GeneratorTest {
         int[] typeNums = new int[visitorNum];
         
         for(int i = 0; i< visitorNum; i++){
-            typeNums[i] = Generator.randomTypeNum(typeList.length);
+            typeNums[i] = generator.randomTypeNum(typeList.length);
             if(typeNums[i] < typeList.length) toReturn = true;
         }
         
@@ -145,7 +145,7 @@ public class GeneratorTest {
         int[] locationNums = new int[visitorNum];
         
         for(int i = 0; i < visitorNum; i++){
-            locationNums[i] = Generator.randomLocationNum(locationList.length);
+            locationNums[i] = generator.randomLocationNum(locationList.length);
             if(locationNums[0] != locationNums[i]) difference = true;
         }
         
@@ -165,7 +165,7 @@ public class GeneratorTest {
         int[] locationNums = new int[visitorNum];
         
         for(int i = 0; i< visitorNum; i++){
-            locationNums[i] = Generator.randomLocationNum(locationList.length);
+            locationNums[i] = generator.randomLocationNum(locationList.length);
             if(locationNums[i] < locationList.length) toReturn = true;
         }
         

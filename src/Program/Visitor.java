@@ -7,9 +7,7 @@ package Program;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  *
@@ -66,7 +64,7 @@ public class Visitor{
     }
     
     //set visitor's preference according to their types
-    public List<String> setPreferenceList(String type){
+    public List<String> getPreferenceList(String type){
         if(type.equals("Student")){
               likeList = Arrays.asList("Squirrel Hill", "Downtown", "The Point");
               return likeList;
@@ -84,6 +82,7 @@ public class Visitor{
 
     //whether the visitor like the location or not
     public boolean likeOrNot(String location){
+        
        return likeList.contains(location);
     }
 }
