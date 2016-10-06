@@ -35,15 +35,15 @@ public class Visitor{
     
     //set the type accroding by passing in Generator 
     //return the string of the type
-    public String setType(Generator generator, int bound){
+    public String getType(Generator generator, int bound){
         this.type = typeList[generator.randomTypeNum(bound)];
         return type;
     }
             
-    //get the type
-    public String getType(){
-        return type;
-    }
+//    get the type
+//    public String getType(){
+//        return type;
+//    }
     
 //    //assign random location
 //    public void setLocation(String location){
@@ -52,14 +52,14 @@ public class Visitor{
     
     //assign location accroding by passing in generated random number
     //return the string of the location
-    public String setLocation(Generator generator, int bound){
+    public String getNextLocation(Generator generator, int bound){
         this.location = locationList[generator.randomTypeNum(bound)];
         return location;
     }
     
     
    //get location
-    public String getLocation(){
+    public String getCurLocation(){
         return location;
     }
     

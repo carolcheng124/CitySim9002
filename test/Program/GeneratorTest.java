@@ -30,66 +30,6 @@ public class GeneratorTest {
     @After
     public void tearDown() throws Exception{
     }
-
-
-    //seed is 9
-//    private Generator generator = new Generator(9);
-
-//    /**
-//     * Test of randomType method, of class Generator.
-//     * seed is 9 and bound is equal to the size of typeList
-//     * Return true if RandomLocation() return a location within the locationList
-//     */
-//    @Test
-//    public void testRandomTypeNum0() {
-//        System.out.println("randomType Test");
-//        Boolean toReturn = false;
-//
-//        String result = Generator.randomType();
-//        for(int i = 0; i< typeList.length; i++){
-//            if(result.equals(typeList[i])) toReturn = true;
-//        }
-//        assertTrue(toReturn);
-//    }
-//    
-//    /**
-//    * Five visitors should have different types as types are generated randomly
-//    * Return true as types of five visitors are different
-//    */
-//    @Test
-//    public void testRandomType1() {
-//        System.out.println("randomType Test");
-//        Boolean flag = true;
-//        
-//        String type1 = Generator.randomType();
-//        for(int i = 0; i < 4; i++){
-//            if(!type1.equals(Generator.randomType())) flag = true;
-//        }
-//        assertTrue(flag);
-//
-//    }
-//
-//
-//    /**
-//     * Test of randomLocation method, of class Generator.
-//     * seed is 9 and bound is equal to the size of locationList
-//     * Return true if RandomLocation() return a location within the locationList
-//     */
-//    @Test
-//    public void testRandomLocation() {
-//        Boolean toReturn = false;
-//        
-//        System.out.println("randomLocation Test");
-//        int bound = locationList.length;
-//        String result = Generator.randomLocation(bound);
-//        for(int i = 0; i< locationList.length; i++){
-//            if(result.equals(locationList[i])) toReturn = true;
-//        }
-//        assertTrue(toReturn);
-//        
-//    }
-    
-    
     
     
    /**

@@ -5,15 +5,13 @@
  */
 package Domain;
 
-import java.util.LinkedList;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import static org.mockito.Matchers.any;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  *
@@ -74,22 +72,28 @@ public class ValidatorTest {
         Assert.assertFalse(validator.validateArgumentType(new String[] {}));
     }
     
-    //STUBBING
+    //DOUBLE + STUBBING
     //Return true if both validateArgumentType() and validateNumberOfArguments() return true
     @Test
     public void ifBothMethodReturnTrue(){
-         when(validator.validateArgumentType(any(String[].class))).thenReturn(true);
-         when(validator.validateNumberOfArguments(any(String[].class))).thenReturn(true);
-         Assert.assertTrue(validator.validateArguments(any(String[].class)));
+         Validator mockValidator = mock(Validator.class);
+         when(mockValidator.validateArgumentType(any(String[].class))).thenReturn(true); 
+         when(mockValidator.validateNumberOfArguments(any(String[].class))).thenReturn(true);
+         when(mockValidator.validateArguments(any(String[].class))).thenCallRealMethod();
+
+         Assert.assertTrue(mockValidator.validateArguments(new String[0]));
     }
     
-    //STUBBING
+    //DOUBLE+STUBBING
     //Return false if one of validateArgumentType() and validateNumberOfArguments() return false
     @Test
     public void ifAnyMethodReturnFalse(){
-         Mockito.when(validator.validateArgumentType(any(String[].class))).thenReturn(true);
-         Mockito.when(validator.validateNumberOfArguments(any(String[].class))).thenReturn(false);
-         Assert.assertFalse(validator.validateArguments((any(String[].class))));
+         Validator mockValidator = mock(Validator.class);
+         when(mockValidator.validateArgumentType(any(String[].class))).thenReturn(true); 
+         when(mockValidator.validateNumberOfArguments(any(String[].class))).thenReturn(true);
+         when(mockValidator.validateArguments(any(String[].class))).thenCallRealMethod();
+         
+         Assert.assertFalse(mockValidator.validateArguments(any(String[].class)));
     }
     
     

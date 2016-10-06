@@ -5,16 +5,11 @@
  */
 package Program;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
-import org.mockito.Mockito;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -41,7 +36,7 @@ public class VisitorTest {
 
     
     /**
-     * SET TYPE TEST - 0
+     * GET TYPE TEST - 0
      * Test of SetType method, of class Visitor.
      * Double + Stubbing
      * Mock the random generator
@@ -49,7 +44,7 @@ public class VisitorTest {
      * five visitors should have the same types as "Student"
      */
     @Test
-    public void testSetType0() {
+    public void testGetType0() {
         Boolean same = false;
         
         Generator mockGenerator = mock(Generator.class);
@@ -60,7 +55,7 @@ public class VisitorTest {
         
         for(int i = 0; i < visitorNum; i++){
             visitors[i] = new Visitor();
-            String curType = visitors[i].setType(mockGenerator, typeList.length);
+            String curType = visitors[i].getType(mockGenerator, typeList.length);
             if("Student".equals(curType)) same = true;
         }
         
@@ -68,14 +63,14 @@ public class VisitorTest {
     }
     
     /**
-      * SET TYPE TEST - 1
+      * GET TYPE TEST - 1
      * Test of getType method, of class Visitor.
      * use real random generator to generate different type numbers
      * five visitors should have different types numbers
      * 
      */
     @Test
-    public void testSetType1() {
+    public void testGetType1() {
         Boolean difference = false;
        
         Visitor[] visitors = new Visitor[visitorNum];
@@ -83,7 +78,7 @@ public class VisitorTest {
         
         for(int i = 0; i < visitorNum; i++){
             visitors[i] = new Visitor();
-            String curType = visitors[i].setType(generator, typeList.length);
+            String curType = visitors[i].getType(generator, typeList.length);
             if(! visitors[0].type.equals(curType))  difference = true;
         }
     
@@ -93,7 +88,7 @@ public class VisitorTest {
 
     
     /**
-     * SET LOCATION TEST - 0
+     * GET NEXT LOCATION TEST - 0
      * Test of SetType method, of class Visitor.
      * Double + Stubbing
      * Mock the random generator
@@ -101,7 +96,7 @@ public class VisitorTest {
      * five visitors should have the same location as "Squirrel Hill"
      */
     @Test
-    public void testSetLocation0() {
+    public void testGetNextLocation0() {
         Boolean same = false;
         
         Generator mockGenerator = mock(Generator.class);
@@ -112,7 +107,7 @@ public class VisitorTest {
         
         for(int i = 0; i < visitorNum; i++){
             visitors[i] = new Visitor();
-            String nextLocation = visitors[i].setLocation(mockGenerator, locationList.length);
+            String nextLocation = visitors[i].getNextLocation(mockGenerator, locationList.length);
             if("Squirrel Hill".equals(nextLocation)) same = true;
         }
         
@@ -120,14 +115,14 @@ public class VisitorTest {
     }
     
     /**
-     * SET TYPE TEST - 1
+     * GET NEXT LOCATION TEST - 1
      * Test of getType method, of class Visitor.
      * use real random generator to generate different location numbers
      * five visitors should have different types numbers
      * 
      */
     @Test
-    public void testSetLocation1() {
+    public void testGetNextLocation1() {
         Boolean difference = false;
        
         Visitor[] visitors = new Visitor[visitorNum];
@@ -135,7 +130,7 @@ public class VisitorTest {
         
         for(int i = 0; i < visitorNum; i++){
             visitors[i] = new Visitor();
-            String nextLocation = visitors[i].setLocation(generator, locationList.length);
+            String nextLocation = visitors[i].getNextLocation(generator, locationList.length);
             if(! visitors[0].location.equals(nextLocation))  difference = true;
         }
     
@@ -146,7 +141,7 @@ public class VisitorTest {
 
     /**
      * LIKE OR NOT TEST - 0
-     * Double
+     * DOUBLE
      * Test of likeOrNot method, of class Visitor.
      * Set the visitor's type to be a "Student"
      * Set the test location to be "Downtown"

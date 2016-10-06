@@ -46,30 +46,30 @@ public class CitySim9002 {
             String nextLocation = "";
             
             //NO.1 set visitor's type
-            String curType = curVisitor.setType(generateType, typeList.length);
+            String curType = curVisitor.getType(generateType, typeList.length);
             System.out.println("Visitor " + i + " is a " + curType);
             
             //set preference list
             curVisitor.getPreferenceList(curType);
             
             //NO.2 assign random location for each visitor
-            while(curVisitor.getLocation() != null){ //leave the city as terminator
-                if ("No location".equals(curVisitor.getLocation())) {
+            while(curVisitor.getCurLocation() != null){ //leave the city as terminator
+                if ("No location".equals(curVisitor.getCurLocation())) {
                     //visitor shouldn't leave for the first time
-                     nextLocation = curVisitor.setLocation(generateLocation, locationList.length-1);
+                     nextLocation = curVisitor.getNextLocation(generateLocation, locationList.length-1);
                 }
                 else{
                     //display the location
                     System.out.println("Visitor " + i + " is going to " + nextLocation);
                     
                     //like the location or not
-                    if(curVisitor.likeOrNot(curVisitor.getLocation()))
-                        System.out.println("Visitor " + i + " like " + curVisitor.getLocation());
+                    if(curVisitor.likeOrNot(curVisitor.getCurLocation()))
+                        System.out.println("Visitor " + i + " like " + curVisitor.getCurLocation());
                     else
-                        System.out.println("Visitor " + i + " did not like " + curVisitor.getLocation());
+                        System.out.println("Visitor " + i + " did not like " + curVisitor.getCurLocation());
                     
                     //random assign location from 4 places or leave the city
-                    nextLocation = curVisitor.setLocation(generateLocation, locationList.length);
+                    nextLocation = curVisitor.getNextLocation(generateLocation, locationList.length);
                 
                 }
             }
