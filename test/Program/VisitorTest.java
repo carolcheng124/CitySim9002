@@ -5,6 +5,7 @@
  */
 package Program;
 
+import java.util.List;
 import java.util.Random;
 import org.junit.After;
 import org.junit.Before;
@@ -51,17 +52,13 @@ public class VisitorTest {
         
         Random mockRandom = mock(Random.class);
         when(mockRandom.nextInt(any(int.class))).thenReturn(0);
-//       !!!!!!
-//       Generator mockGenerator = mock(Generator.class);
-//       when(mockGenerator.randomTypeNum(typeList.length)).thenReturn(0);
-            
+
         Visitor[] visitors = new Visitor[visitorNum];
         
         
         for(int i = 0; i < visitorNum; i++){
             visitors[i] = new Visitor();
-//          String curType = visitors[i].getType(mockGenerator, typeList.length);
-            String curType = visitors[i].getType(mockRandom, typeList.length);//!!!!
+            String curType = visitors[i].getType(mockRandom, typeList.length);
             if("Student".equals(curType)) same = true;
         }
         
@@ -80,13 +77,12 @@ public class VisitorTest {
         Boolean same = true;
        
         Visitor[] visitors = new Visitor[visitorNum];
+        //seed as 9
         Random random = new Random(9);
-        //        Generator generator = new Generator(9);
         
         for(int i = 0; i < visitorNum; i++){
             visitors[i] = new Visitor();
-//            String curType = visitors[i].getType(generator, typeList.length);
-            String curType = visitors[i].getType(random, typeList.length);//!!!!
+            String curType = visitors[i].getType(random, typeList.length);
             if(! visitors[0].type.equals(curType))  same = false;
         }
     
@@ -110,10 +106,7 @@ public class VisitorTest {
         
         Random mockRandom = mock(Random.class);
         when(mockRandom.nextInt(any(int.class))).thenReturn(0);
-//        !!!!
-//        Generator mockGenerator = mock(Generator.class);
-//        when(mockGenerator.randomLocationNum(anyInt())).thenReturn(0);
-        
+
         Visitor[] visitors = new Visitor[visitorNum];
         
         
@@ -138,19 +131,59 @@ public class VisitorTest {
         Boolean difference = false;
        
         Visitor[] visitors = new Visitor[visitorNum];
-//        Generator generator = new Generator(9);
+        //seed as 9
         Random random = new Random(9);
         
         for(int i = 0; i < visitorNum; i++){
             visitors[i] = new Visitor();
-//            String nextLocation = visitors[i].getNextLocation(generator, locationList.length);
-            String nextLocation = visitors[i].getNextLocation(random, locationList.length);//!!!
+            String nextLocation = visitors[i].getNextLocation(random, locationList.length);
             if(! visitors[0].location.equals(nextLocation))  difference = true;
         }
     
         assertTrue(difference);
     }
     
+    
+    /**
+     * GET CURRENT LOCATION TEST
+     * DOUBLE+STUBBING
+     * Test of getCurLocation method, of class Visitor.
+     * Mock the random Generator
+     * Stubbing the nextInt method
+     * Assign location for visitor
+     * Return true if visitor's current location is the same as the assigned
+     */
+    @Test
+    public void testGetCurLocation() {
+        
+        Random mockRandom = mock(Random.class);
+        when(mockRandom.nextInt(any(int.class))).thenReturn(0);
+        
+        String nextLocation = visitor.getNextLocation(mockRandom, locationList.length);
+        
+        assertEquals(nextLocation, visitor.getCurLocation());
+        
+    }
+    
+    
+    /**
+     * GET PREFERENCE LIST TEST
+     * Test of getPreferenceList method, of class Visitor.
+     * Set visitor's type is Student
+     * As we've already known, Student should like "Downtown"
+     * Return true if preference list contains "Downtown"
+     */
+    @Test
+    public void testGetPreferenceList() {
+        //DOUBLE
+        visitor.type = "Student";
+        String location = "Downtown";
+        
+        List<String> preference = visitor.getPreferenceList(visitor.type);
+        
+        assertTrue(preference.contains(location) );
+        
+    }
   
 
     /**

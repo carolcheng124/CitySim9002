@@ -95,6 +95,7 @@ public class ValidatorTest {
          Assert.assertTrue(mockValidator.validateArguments(new String[0]));
     }
     
+    
     //DOUBLE+STUBBING
     //mock validator
     //stubbing validateArgumentType() & validateNumberOfArguments()

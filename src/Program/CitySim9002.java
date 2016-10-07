@@ -19,15 +19,10 @@ public class CitySim9002 {
     public static String errorMessage = "Please enter one integer argument, seed";
     public static List<Visitor> visitorList = new ArrayList<Visitor>();
     public static int seed;
+    public static Random random;
     public static String[] typeList = {"Student", "Professor","Business Person", "Blogger"};
     public static String[] locationList = {"Squirrel Hill", "Downtown", "The Point", "The Cathedral of Learning", null};
     
-    public static Random random;
-    
-    //random generator of numbers within a bound
-//    public int randomNum(Random random, int bound){
-//          return random.nextInt(bound);
-//    }
     
     
     public static void main(String[] args) {
@@ -35,40 +30,31 @@ public class CitySim9002 {
         if (new Validator().validateArguments(args)) {
             seed = Integer.parseInt(args[0]);
             System.out.println("Welcome to CitySim!  Your seed is " + seed);
-           // return 0;
         }
         else {
             System.out.println(errorMessage);
-           // return -1;
         }
         
           random = new Random(seed);
           
-    
-//        Generator generator = new Generator(seed);
-//        Generator generateType = new Generator(seed);
-//        Generator generateLocation = new Generator(seed);
-          
-        
-        //five visitor iterations
+   
         for(int i = 1; i <= 5; i++){
             Visitor curVisitor = new Visitor();
             visitorList.add(curVisitor);
             String nextLocation = "";
             
             //NO.1 set visitor's type
-//            String curType = curVisitor.getType(generator, typeList.length); //!!!!
-            String curType = curVisitor.getType(random, typeList.length); //!!!!
+            String curType = curVisitor.getType(random, typeList.length);
             System.out.println("Visitor " + i + " is a " + curType);
             
             //set preference list
-            curVisitor.getPreferenceList(curType);
+            List<String> preference = curVisitor.getPreferenceList(curType);
             
             //NO.2 assign random location for each visitor
             while(curVisitor.getCurLocation() != null){ //leave the city as terminator
                 if ("No location".equals(curVisitor.getCurLocation())) {
                     //visitor shouldn't leave for the first time
-                     nextLocation = curVisitor.getNextLocation(random, locationList.length-1);//!!!!!
+                     nextLocation = curVisitor.getNextLocation(random, locationList.length-1);
                 }
                 else{
                     //display the location
@@ -91,7 +77,7 @@ public class CitySim9002 {
             visitorList.remove(curVisitor);
             
             System.out.println("***");
-        }//for end
+        }//exit as five visitors finished visiting
         
     }
 }

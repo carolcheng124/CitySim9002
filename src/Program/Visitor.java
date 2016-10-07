@@ -22,13 +22,8 @@ public class Visitor{
     public static String[] locationList = {"Squirrel Hill", "Downtown", "The Point", "The Cathedral of Learning", null};    
 
     
-    //set the type accroding by passing in Generator 
+    //set the type accroding by passing in random and bound 
     //return the string of the type
-    //!!!!!
-//    public String getType(Generator generator, int bound){
-//        this.type = typeList[generator.randomTypeNum(bound)];
-//        return type;
-//    }
     public String getType(Random random, int bound){
         this.type = typeList[random.nextInt(bound)];
         return type;
@@ -37,24 +32,19 @@ public class Visitor{
     
     //assign location accroding by passing in generated random number
     //return the string of the location
-//    public String getNextLocation(Generator generator, int bound){
-//        this.location = locationList[generator.randomTypeNum(bound)];
-//        return location;
-//    }
-    
-    //!!!!!!
     public String getNextLocation(Random random, int bound){
         this.location = locationList[random.nextInt(bound)];
         return location;
     }
     
     
-   //get location
+   //get current location of visitors
     public String getCurLocation(){
         return location;
     }
     
     //set visitor's preference according to their types
+    //return preference list
     public List<String> getPreferenceList(String type){
         switch (type) {
             case "Student":
@@ -72,6 +62,7 @@ public class Visitor{
     }
 
     //whether the visitor like the location or not
+    //return true if like, return false if not
     public boolean likeOrNot(String location){
         
        return likeList.contains(location);
