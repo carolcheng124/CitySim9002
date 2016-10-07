@@ -21,7 +21,14 @@ public class CitySim9002 {
     public static int seed;
     public static String[] typeList = {"Student", "Professor","Business Person", "Blogger"};
     public static String[] locationList = {"Squirrel Hill", "Downtown", "The Point", "The Cathedral of Learning", null};
-   
+    
+    public static Random random;
+    
+    //random generator of numbers within a bound
+//    public int randomNum(Random random, int bound){
+//          return random.nextInt(bound);
+//    }
+    
     
     public static void main(String[] args) {
         //validation of arguments
@@ -35,9 +42,13 @@ public class CitySim9002 {
            // return -1;
         }
         
-//      Generator generator = new Generator(seed);
-        Generator generateType = new Generator(seed);
-        Generator generateLocation = new Generator(seed);
+          random = new Random(seed);
+          
+    
+//        Generator generator = new Generator(seed);
+//        Generator generateType = new Generator(seed);
+//        Generator generateLocation = new Generator(seed);
+          
         
         //five visitor iterations
         for(int i = 1; i <= 5; i++){
@@ -46,7 +57,8 @@ public class CitySim9002 {
             String nextLocation = "";
             
             //NO.1 set visitor's type
-            String curType = curVisitor.getType(generateType, typeList.length);
+//            String curType = curVisitor.getType(generator, typeList.length); //!!!!
+            String curType = curVisitor.getType(random, typeList.length); //!!!!
             System.out.println("Visitor " + i + " is a " + curType);
             
             //set preference list
@@ -56,7 +68,7 @@ public class CitySim9002 {
             while(curVisitor.getCurLocation() != null){ //leave the city as terminator
                 if ("No location".equals(curVisitor.getCurLocation())) {
                     //visitor shouldn't leave for the first time
-                     nextLocation = curVisitor.getNextLocation(generateLocation, locationList.length-1);
+                     nextLocation = curVisitor.getNextLocation(random, locationList.length-1);//!!!!!
                 }
                 else{
                     //display the location
@@ -69,7 +81,7 @@ public class CitySim9002 {
                         System.out.println("Visitor " + i + " did not like " + curVisitor.getCurLocation());
                     
                     //random assign location from 4 places or leave the city
-                    nextLocation = curVisitor.getNextLocation(generateLocation, locationList.length);
+                    nextLocation = curVisitor.getNextLocation(random, locationList.length);
                 
                 }
             }
@@ -78,7 +90,7 @@ public class CitySim9002 {
             System.out.println("Visitor " + i + " has left the city.");
             visitorList.remove(curVisitor);
             
-            System.out.println("***********");
+            System.out.println("***");
         }//for end
         
     }

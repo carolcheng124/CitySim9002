@@ -30,22 +30,29 @@ public class ValidatorTest {
     public void tearDown() throws Exception{
     }
 
-    //INTEGER LENGTH TEST-0
-    //Return true if the input argument is one integer
+    //ARGUMENTS LENGTH TEST-0
+    //Return true if the input argument array has only one element, length is 1
     @Test
     public void ifOneArgumentIsProvidedReturnTrue() {
         Assert.assertTrue(validator.validateNumberOfArguments(new String[] { "1" }));
     }
     
-    //INTEGER LENGTH TEST-1
-    //Return false if the input argument has more than one integer 
+    //ARGUMENTS LENGTH TEST-1
+    //Return false if the input argument array has more than one element, length is more than 1
     @Test
-    public void ifOneArgumentIsNotProvidedReturnFalse() {
+    public void ifOneArgumentIsNotProvidedReturnFalse0() {
         Assert.assertFalse(validator.validateNumberOfArguments(new String[] { "1", "2" }));
     }
     
+    //ARGUMENTS LENGTH TEST-2
+    //Return false if the input argument array has no element, null
+    @Test
+    public void ifOneArgumentIsNotProvidedReturnFalse1() {
+        Assert.assertFalse(validator.validateNumberOfArguments(new String[] {}));
+    }
+    
     //VALID INTEGER TEST-0
-    //Return trueassert if the input argument is an integer
+    //Return true if the input argument is an integer
     @Test
     public void ifArgumentIsAnIntegerReturnTrue() {
         Assert.assertTrue(validator.validateArgumentType(new String[] { "1" }));
@@ -62,17 +69,21 @@ public class ValidatorTest {
     //Return false if the input argument is a special character
     @Test
     public void ifArgumentIsNotAnIntegerReturnFalse1() {
-        Assert.assertFalse(validator.validateArgumentType(new String[] { "&&" }));
+        Assert.assertFalse(validator.validateArgumentType(new String[] { "&" }));
     }
     
     //VALID INTEGER TEST-3
-    //Return false if the input argument is null  
+    //Return false if the input argument is empty
     @Test
-    public void ifArgumentIsNullReturnFalse(){
-        Assert.assertFalse(validator.validateArgumentType(new String[] {}));
+    public void validateFirstArgumentLengthTest0() {
+        Assert.assertFalse(validator.validateArgumentType(new String[] {""}));
     }
     
+    
     //DOUBLE + STUBBING
+    //mock validator
+    //stubbing validateArgumentType() & validateNumberOfArguments()
+    //test whether AND function works
     //Return true if both validateArgumentType() and validateNumberOfArguments() return true
     @Test
     public void ifBothMethodReturnTrue(){
@@ -85,12 +96,15 @@ public class ValidatorTest {
     }
     
     //DOUBLE+STUBBING
-    //Return false if one of validateArgumentType() and validateNumberOfArguments() return false
+    //mock validator
+    //stubbing validateArgumentType() & validateNumberOfArguments()
+    //test whether AND function works
+    //Return false if any one of validateArgumentType() and validateNumberOfArguments() return false
     @Test
     public void ifAnyMethodReturnFalse(){
          Validator mockValidator = mock(Validator.class);
          when(mockValidator.validateArgumentType(any(String[].class))).thenReturn(true); 
-         when(mockValidator.validateNumberOfArguments(any(String[].class))).thenReturn(true);
+         when(mockValidator.validateNumberOfArguments(any(String[].class))).thenReturn(false);
          when(mockValidator.validateArguments(any(String[].class))).thenCallRealMethod();
          
          Assert.assertFalse(mockValidator.validateArguments(any(String[].class)));

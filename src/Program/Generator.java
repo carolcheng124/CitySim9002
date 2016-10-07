@@ -14,10 +14,12 @@ import java.util.Random;
 public class Generator {
     public Random generator;
 
+    //constructor
     public Generator(int seed){
         generator = new Random(seed);
     }
     
+    //constructor
     //assume seed is 9
     public Generator(){
         generator = new Random(9);

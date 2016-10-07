@@ -8,6 +8,7 @@ package Program;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 /**
  *
@@ -19,41 +20,31 @@ public class Visitor{
     List<String> likeList = new ArrayList<>();
     public static String[] typeList = {"Student", "Professor","Business Person", "Blogger"};
     public static String[] locationList = {"Squirrel Hill", "Downtown", "The Point", "The Cathedral of Learning", null};    
-   
-//    //set the type accroding 
-//    public String setType(String type){
-//        this.type = type;
-//    }
-    
-    
-//    //set the type accroding by passing in generated random number
-//    //return the string of the type
-//    public String setType(int randomNum){
-//        this.type = typeList[randomNum];
-//        return type;
-//    }
+
     
     //set the type accroding by passing in Generator 
     //return the string of the type
-    public String getType(Generator generator, int bound){
-        this.type = typeList[generator.randomTypeNum(bound)];
-        return type;
-    }
-            
-//    get the type
-//    public String getType(){
+    //!!!!!
+//    public String getType(Generator generator, int bound){
+//        this.type = typeList[generator.randomTypeNum(bound)];
 //        return type;
 //    }
+    public String getType(Random random, int bound){
+        this.type = typeList[random.nextInt(bound)];
+        return type;
+    }
     
-//    //assign random location
-//    public void setLocation(String location){
-//        this.location = location;
-//    }
     
     //assign location accroding by passing in generated random number
     //return the string of the location
-    public String getNextLocation(Generator generator, int bound){
-        this.location = locationList[generator.randomTypeNum(bound)];
+//    public String getNextLocation(Generator generator, int bound){
+//        this.location = locationList[generator.randomTypeNum(bound)];
+//        return location;
+//    }
+    
+    //!!!!!!
+    public String getNextLocation(Random random, int bound){
+        this.location = locationList[random.nextInt(bound)];
         return location;
     }
     
@@ -65,19 +56,19 @@ public class Visitor{
     
     //set visitor's preference according to their types
     public List<String> getPreferenceList(String type){
-        if(type.equals("Student")){
-              likeList = Arrays.asList("Squirrel Hill", "Downtown", "The Point");
-              return likeList;
+        switch (type) {
+            case "Student":
+                likeList = Arrays.asList("Squirrel Hill", "Downtown", "The Point");
+                return likeList;
+            case "Professor":
+                likeList = Arrays.asList("Squirrel Hill", "Downtown", "The Point", "The Cathedral of Learning");
+                return likeList;
+            case "Business Person":
+                likeList = Arrays.asList("Squirrel Hill", "Downtown");
+                return likeList;
+            default:
+                return likeList;
         }
-        else if(type.equals("Professor")){
-            likeList = Arrays.asList("Squirrel Hill", "Downtown", "The Point", "The Cathedral of Learning");
-            return likeList;
-        }
-        else if(type.equals("Business Person")){
-            likeList = Arrays.asList("Squirrel Hill", "Downtown");
-            return likeList;
-        }
-       else return likeList;
     }
 
     //whether the visitor like the location or not

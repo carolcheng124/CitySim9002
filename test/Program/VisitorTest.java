@@ -5,11 +5,12 @@
  */
 package Program;
 
+import java.util.Random;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -40,22 +41,27 @@ public class VisitorTest {
      * Test of SetType method, of class Visitor.
      * Double + Stubbing
      * Mock the random generator
-     * Set any generated random type number as 1
-     * five visitors should have the same types as "Student"
+     * Stubbing the nextInt method
+     * Set any generated random number as 0
+     * Return true if five visitors have the same type as "Students"
      */
     @Test
     public void testGetType0() {
         Boolean same = false;
         
-        Generator mockGenerator = mock(Generator.class);
-        when(mockGenerator.randomTypeNum(anyInt())).thenReturn(0);
-        
+        Random mockRandom = mock(Random.class);
+        when(mockRandom.nextInt(any(int.class))).thenReturn(0);
+//       !!!!!!
+//       Generator mockGenerator = mock(Generator.class);
+//       when(mockGenerator.randomTypeNum(typeList.length)).thenReturn(0);
+            
         Visitor[] visitors = new Visitor[visitorNum];
         
         
         for(int i = 0; i < visitorNum; i++){
             visitors[i] = new Visitor();
-            String curType = visitors[i].getType(mockGenerator, typeList.length);
+//          String curType = visitors[i].getType(mockGenerator, typeList.length);
+            String curType = visitors[i].getType(mockRandom, typeList.length);//!!!!
             if("Student".equals(curType)) same = true;
         }
         
@@ -65,24 +71,26 @@ public class VisitorTest {
     /**
       * GET TYPE TEST - 1
      * Test of getType method, of class Visitor.
-     * use real random generator to generate different type numbers
-     * five visitors should have different types numbers
+     * use real random generator to generate different numbers for visitors' types
+     * Return true if five visitors have different types
      * 
      */
     @Test
     public void testGetType1() {
-        Boolean difference = false;
+        Boolean same = true;
        
         Visitor[] visitors = new Visitor[visitorNum];
-        Generator generator = new Generator(9);
+        Random random = new Random(9);
+        //        Generator generator = new Generator(9);
         
         for(int i = 0; i < visitorNum; i++){
             visitors[i] = new Visitor();
-            String curType = visitors[i].getType(generator, typeList.length);
-            if(! visitors[0].type.equals(curType))  difference = true;
+//            String curType = visitors[i].getType(generator, typeList.length);
+            String curType = visitors[i].getType(random, typeList.length);//!!!!
+            if(! visitors[0].type.equals(curType))  same = false;
         }
     
-        assertTrue(difference);
+        assertFalse(same);
     }
     
 
@@ -92,22 +100,26 @@ public class VisitorTest {
      * Test of SetType method, of class Visitor.
      * Double + Stubbing
      * Mock the random generator
-     * Set any generated random type number as 1
-     * five visitors should have the same location as "Squirrel Hill"
+     * Stubbing the nextIn method
+     * Set any generated random type number as 0
+     * Return true if five visitors have the same location as "Squirrel Hill"
      */
     @Test
     public void testGetNextLocation0() {
         Boolean same = false;
         
-        Generator mockGenerator = mock(Generator.class);
-        when(mockGenerator.randomLocationNum(anyInt())).thenReturn(0);
+        Random mockRandom = mock(Random.class);
+        when(mockRandom.nextInt(any(int.class))).thenReturn(0);
+//        !!!!
+//        Generator mockGenerator = mock(Generator.class);
+//        when(mockGenerator.randomLocationNum(anyInt())).thenReturn(0);
         
         Visitor[] visitors = new Visitor[visitorNum];
         
         
         for(int i = 0; i < visitorNum; i++){
             visitors[i] = new Visitor();
-            String nextLocation = visitors[i].getNextLocation(mockGenerator, locationList.length);
+            String nextLocation = visitors[i].getNextLocation(mockRandom, locationList.length);
             if("Squirrel Hill".equals(nextLocation)) same = true;
         }
         
@@ -118,7 +130,7 @@ public class VisitorTest {
      * GET NEXT LOCATION TEST - 1
      * Test of getType method, of class Visitor.
      * use real random generator to generate different location numbers
-     * five visitors should have different types numbers
+     * return true if five visitors have different locations
      * 
      */
     @Test
@@ -126,11 +138,13 @@ public class VisitorTest {
         Boolean difference = false;
        
         Visitor[] visitors = new Visitor[visitorNum];
-        Generator generator = new Generator(9);
+//        Generator generator = new Generator(9);
+        Random random = new Random(9);
         
         for(int i = 0; i < visitorNum; i++){
             visitors[i] = new Visitor();
-            String nextLocation = visitors[i].getNextLocation(generator, locationList.length);
+//            String nextLocation = visitors[i].getNextLocation(generator, locationList.length);
+            String nextLocation = visitors[i].getNextLocation(random, locationList.length);//!!!
             if(! visitors[0].location.equals(nextLocation))  difference = true;
         }
     
@@ -146,21 +160,17 @@ public class VisitorTest {
      * Set the visitor's type to be a "Student"
      * Set the test location to be "Downtown"
      * Student is expected to like "downtown"
-     * Return true as visitor do like this location by likeOrNot()
+     * Return true if visitor do like this location by likeOrNot()
      */
     @Test
     public void testLikeOrNot0() {
-        
-//        Visitor mockVisitor = mock(Visitor.class);
-//        when(mockVisitor.getPreferenceList(any(String.class))).thenReturn(Arrays.asList("Squirrel Hill", "Downtown", "The Point"));
-//        
-        visitor.type = "Student";//double
+        //DOUBLE
+        //assign visitor's type as "Students"
+        visitor.type = "Student";
         String location = "Downtown";
+        
         visitor.getPreferenceList(visitor.type);
-
-//when(visitor.getPreferenceList(any(String.class))).thenReturn(visitor.likeList = new ArrayList<String>(Arrays.asList("Squirrel Hill", "Downtown", "The Point")));//stubbing
-//        
-//        mockVisitor.likeList =v mockVisitor.getPreferenceList(type);
+        
         assertTrue(visitor.likeOrNot(location));
         
     }
@@ -171,13 +181,15 @@ public class VisitorTest {
      * Set the visitor's type to be a "Business person"
      * Set the test location to be "The Cathedral of Learning"
      * "Business person" should not like "The Cathedral of Learning"
-     * Return false as visitor do not like this location by likeOrNot()
+     * Return false if visitor do not like this location by likeOrNot()
      */
     @Test
     public void testLikeOrNot1() {
-        
+        //DOUBLE
+        //assign visitor's type as "Business Person"
+        visitor.type = "Business Person";
         String location = "The Cathedral of Learning";
-        visitor.type = "Business Person";//double
+       
         visitor.getPreferenceList(visitor.type);//stubbing
         
         assertFalse(visitor.likeOrNot(location));
