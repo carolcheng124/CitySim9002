@@ -229,7 +229,7 @@ public class VisitorTest {
      * Return true if preference list contains "Downtown"
      */
     @Test
-    public void testGetPreferenceList() {
+    public void testGetPreferenceList0() {
         //DOUBLE
         visitor.type = "Student";
         String location = "Downtown";
@@ -237,6 +237,21 @@ public class VisitorTest {
         List<String> preference = visitor.getPreferenceList(visitor.type);
         
         assertTrue(preference.contains(location) );
+        
+    }
+    
+    /**
+     * GET PREFERENCE LIST TEST
+     * Test of getPreferenceList method, of class Visitor.
+     * Set visitor's type is "worker" which is not on the type list
+     * Return null if no preference list is created
+     */
+    @Test
+    public void testGetPreferenceList1() {
+        
+        List<String> preference = visitor.getPreferenceList("Worker");
+        
+        assertNull(null);
         
     }
   
