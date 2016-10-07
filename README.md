@@ -18,3 +18,5 @@ The most difficulty is when I was trying to develop the program, in the meanwhil
 An failure test case that I had was “ifBothMethodReturnTrue()”test case for Validator class. I was trying to stub validateArgumentType() and validateNumberOfArguments() in order to test validateArguments() with excluding the effect from these two methods. However, every time it always returned false even though I set both method to return true. Finally I talked with professor, he taught me a cool method thenCallRealMethod(), therefore, when mockValidator calls validateArguments(), it would go through the real validateArguments(). It solved my problem and make this testcase passed at end.
 
 Another failure test that I had was TestLikeOrNot(). My original idea to create a stub for getPreferenceList() didn’t work. The error message was always “Nullpointer”. Then I figured out, I could not assign the likeList to visitor by stubbing. However, likeOrNot() depends on the likeList. Therefore, stubbing proved a failure. I made changes to delete stubbing and it passed finally.
+
+Currently, all test cases are passed.
