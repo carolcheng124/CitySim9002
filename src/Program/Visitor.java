@@ -5,6 +5,7 @@
  */
 package Program;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -25,6 +26,7 @@ public class Visitor{
     //set the type accroding by passing in random and bound 
     //return the string of the type
     public String getType(Random random, int bound){
+        if(bound < 0 || bound > typeList.length) throw new IndexOutOfBoundsException();
         this.type = typeList[random.nextInt(bound)];
         return type;
     }
@@ -33,6 +35,7 @@ public class Visitor{
     //assign location accroding by passing in generated random number
     //return the string of the location
     public String getNextLocation(Random random, int bound){
+        if(bound < 0|| bound > locationList.length) throw new IndexOutOfBoundsException();
         this.location = locationList[random.nextInt(bound)];
         return location;
     }

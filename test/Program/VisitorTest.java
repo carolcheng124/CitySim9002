@@ -89,8 +89,34 @@ public class VisitorTest {
         assertFalse(same);
     }
     
-
+    /**
+     * GET TYPE TEST - 2
+     * Test of getType method, of class Visitor.
+     * assign bound value less than 0
+     * getType() should throw an IndexOutOfBoundsexception
+     */
+    @Test(expected = IndexOutOfBoundsException.class) 
+    public void testGetType2() {
+        
+        Random random = new Random();
+        visitor.getType(random, -1);
+        
+    }
     
+    /**
+     * GET TYPE TEST - 3
+     * Test of getType method, of class Visitor.
+     * assign bound value as 10, which is more than the amount of types
+     * getType() should throw an IndexOutOfBoundsexception
+     */
+    @Test(expected = IndexOutOfBoundsException.class) 
+    public void testGetType3() {
+        
+        Random random = new Random();
+        visitor.getType(random, 10);
+        
+    }
+
     /**
      * GET NEXT LOCATION TEST - 0
      * Test of SetType method, of class Visitor.
@@ -142,6 +168,35 @@ public class VisitorTest {
     
         assertTrue(difference);
     }
+    
+        /**
+     * GET LOCATION TEST - 2
+     * Test of getNextLocation method, of class Visitor.
+     * assign bound value less than 0
+     * getNextLocation() should throw an IndexOutOfBoundsexception
+     */
+    @Test(expected = IndexOutOfBoundsException.class) 
+    public void testGetNextLocation2() {
+        
+        Random random = new Random();
+        visitor.getNextLocation(random, -1);
+        
+    }
+    
+    /**
+     * GET Location TEST - 3
+     * Test of getType method, of class Visitor.
+     * assign bound value as 10, which is more than the amount of locations
+     * getNextLocation() should throw an IndexOutOfBoundsexception
+     */
+    @Test(expected = IndexOutOfBoundsException.class) 
+    public void testGetNextLocation3() {
+        
+        Random random = new Random();
+        visitor.getNextLocation(random, 10);
+        
+    }
+    
     
     
     /**
